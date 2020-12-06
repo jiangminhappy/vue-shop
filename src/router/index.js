@@ -4,7 +4,7 @@ import VueRoter from 'vue-router';
 Vue.use(VueRoter);
 
 import Home from  '../views/home/Home';
-import Detail from '../views/detail/Detail';
+import Category from '../views/category/Category';
 import Cart from '../views/cart/Cart';
 import Profile from '../views/profile/Profile'
 
@@ -15,8 +15,8 @@ const routes = [{
   component: Home
 }, {
   path: '/category',
-  name: 'detail',
-  component: Detail
+  name: 'category',
+  component: Category
 }, {
   path: '/cart',
   name: 'cart',

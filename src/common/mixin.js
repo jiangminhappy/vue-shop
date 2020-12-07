@@ -16,11 +16,7 @@ export const imgListenerMixin = {
     this.imgListener = () => {
       refresh();
     };
-
-    console.log('imgListener', () => {
-      refresh();
-    })
-
+    this.$bus.$on("imgLoad", this.imgListener)
   }
 }
 

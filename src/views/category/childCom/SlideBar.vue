@@ -2,9 +2,10 @@
   <div class="slide-bar">
     <scroll class="slide-bar-height">
       <template v-for="(item, index) in slideBarList">
-        <button 
-          :class="currentIndex === index ? active : ''"
+        <button
+          :class="currentIndex === index ? 'active' : ''"
           :key="index"
+          @click="slideBarItemClick(item, index)"
           class="slide-bar-item"
         >
           {{ item.title }}
@@ -15,24 +16,35 @@
 </template>
 
 <script>
-import Scroll from '../../../components/common/scroll/Scroll.vue'
+import Scroll from "@/components/common/scroll/Scroll";
+
 export default {
+  name: "SlideBar",
   components: { Scroll },
-  name: 'SlideBar',
-  peops: {
-    slideBarList: {
-      type: Array,
-      default() {
-        return []
-      }
-    }
-  },
   data() {
     return {
       currentIndex: 0
+    };
+  },
+  props: {
+    slideBarList: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
+  },
+  methods: {
+    slideBarItemClick(item, index) {
+      const obj = {
+        maitKey: item.maitKey,
+        index
+      };
+      this.currentIndex = index;
+      this.$emit("slideBarItemClick", obj);
     }
   }
-}
+};
 </script>
 
 <style scoped>

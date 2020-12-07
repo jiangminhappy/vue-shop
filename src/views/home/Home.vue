@@ -28,7 +28,7 @@
       <!-- 展示区 --> 
       <tab-control 
         :titles="tabControlTitles" 
-        :tabClick="tabClick"  
+        @tabClick="tabClick"  
         class="home-tab-control"
         ref="tabControl2"
       />
@@ -98,17 +98,14 @@ export default {
     // 请求多个数据
     getHomeMultidata() {
       getHomeMultidata().then(res => {
-        console.log(res);
         this.banners = res.data.banner.list;
         this.recommend = res.data.recommend.list;
       })
     },
     // 请求商品的数据
     getHomeGoodsData(type) {
-      console.log(type);
       const page = this.goods[type].page + 1;
       getHomeGoodsData(type, page).then(res => {
-        // console.log(res.data.list)
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
 
@@ -123,6 +120,8 @@ export default {
       } else if(index === 2) {
         this.curType = "sell"
       }
+
+      // this.$$refs
     },
 
     // 上拉加载更多
@@ -132,7 +131,7 @@ export default {
 
     // 获取tabControl的位置
     swiperLoad() {
-      this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop;
+      this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop - 2;
     },
 
     // 滚动的位置
@@ -145,7 +144,18 @@ export default {
     this.getHomeGoodsData("pop");
     this.getHomeGoodsData("new");
     this.getHomeGoodsData("sell");
+     console.log(this.tabOffsetTop)
   },
+    // keep-alive状态下进来的时候的生命周期
+  activated() {
+    // 同时刷新better-scroll防止不能滚动
+    this.$refs.scroll.refresh();
+  },
+  // keep-alive状态下离开的时候的生命周期
+  deactivated() {
+    // 取消home组件事件总线的监听
+    this.$bus.$off("imgLoad", this.imgListener);
+  }
 }
 
 </script>

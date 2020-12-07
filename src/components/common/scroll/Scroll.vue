@@ -48,7 +48,6 @@ export default {
     // 监听滚动的位置
     if(this.probeType === 2 || this.probeType === 3) {
       this.scroll.on("scroll", position => {
-        console.log(position.y)
         this.$emit("backTopScroll", position)
       })
     }
@@ -57,11 +56,10 @@ export default {
   methods: {
     // 保证this.scroll存在才执行
     refresh() {
-      this.scroll && this.scroll.finishPullUp();
+      this.scroll && this.scroll.refresh();
     },
   // 加载更多
     finishPullUp() {
-      console.log(this.scroll);
       this.scroll && this.scroll.finishPullUp();
     },
     // 回到指定的位置

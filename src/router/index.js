@@ -6,7 +6,8 @@ Vue.use(VueRoter);
 import Home from  '../views/home/Home';
 import Category from '../views/category/Category';
 import Cart from '../views/cart/Cart';
-import Profile from '../views/profile/Profile'
+import Profile from '../views/profile/Profile';
+import Detail from '../views/detail/Detail';
 
 
 const routes = [{
@@ -25,6 +26,10 @@ const routes = [{
   path: '/profile',
   name: 'profile',
   component: Profile
+}, {
+  path: '/detail/:iid',
+  name: 'detail',
+  component: Detail
 }];
 
 const router = new VueRoter({

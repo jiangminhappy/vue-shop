@@ -30,6 +30,7 @@ export const backToMixin = {
   },
   methods: {
     backTop() {
+      console.log('curPosition', this.curPosition);
       this.$refs.scroll.scrollTo(0, 0)
     }
   }

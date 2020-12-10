@@ -8,7 +8,8 @@
       >
         <img 
           @load="imgLoad"
-          :src="item.show.img"      
+          :src="item.show.img" 
+          @click="goodItemClick(item)"     
         >
         <div class="goods-info">
           <p>{{ item.title }}</p>
@@ -39,6 +40,14 @@ export default {
       // console.log(111)
       this.$bus.$emit("imgLoad");
     },
+    goodItemClick(item) {
+      if(item.iid) {
+        console.log('success')
+        this.$router.push(`/detail/${item.iid}`);
+      } else {
+        this.$toast(item.title);
+      }
+    }
   }
 }
 </script>

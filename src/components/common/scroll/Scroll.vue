@@ -65,6 +65,11 @@ export default {
     // 回到指定的位置
     scrollTo(x, y, time = 500) {
       this.scroll && this.scroll.scrollTo(x, y, time);
+    },
+
+    // 滚动到指定的位置
+    scrollToElement(el, time) {
+      this.scroll.scrollToElement(el, time);
     }
   }
 }
